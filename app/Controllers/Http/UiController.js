@@ -8,7 +8,7 @@ const Member = use('App/Models/Member')
 const Perlengkapan = use('App/Models/Perlengkapan')
 const Personil = use('App/Models/Personil')
 const Tender = use('App/Models/Tender')
-
+const Database = use('Database')
 class UiController {
 
     async Dashboard({request, response, session}){
@@ -32,7 +32,10 @@ class UiController {
         const getTender = await Tender.query()
                             .where('id_bq', id)
                             .groupBy('bulan')
+                            .select('*')
+                            .select(Database.raw('SUM(`nominal`) AS total_nominal'))
                             .fetch()
+        console.log(getTender.toJSON())
         return View.render('PilihSuratPenerimaan', { data_bq : getBQData.toJSON() , id : id , data_tender : getTender.toJSON() })
     }
 

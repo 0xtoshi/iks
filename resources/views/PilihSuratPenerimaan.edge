@@ -40,7 +40,7 @@
                                     <br/>
                                     <div class="row">
                                         <div class="col-sm-2"><h4>Nilai Tender  : </h4></div>
-                                        <div class="col-sm-3"><h4>{{data_bq.nilai}} </h4></div>
+                                        <div class="col-sm-3"><h4 id="nilai_tender">{{data_bq.nilai}} </h4></div>
                                     </div>
                                     <br/>
                                     <div class="row">
@@ -67,7 +67,7 @@
 												@each(data in data_tender)
 												<tr id="tender_{{ id }}">
 													<td>{{ data.bulan }}</td>
-													<td>{{ data.nominal }}</td>
+													<td id="total_nominal"> {{ data.total_nominal }} </td>
 													<td class="text-left">
                                                     <a href="/surat_penerimaan/id/{{ id }}" class="btn btn-info" type="button"><i class="fa fa-edit"></i> Edit!</a>
                                                     <button name="deleteBulan" id="{{ data.bulan }}" value="{{ data_bq.id }}" type="button" class="btn btn-danger"><i class="fa fa-trash"></i>Delete!</button>
@@ -121,7 +121,8 @@ $('document').ready(() => {
 					success : (data) => { 
 						swal("Sukses Menghapus Bulan"+this.id, {
 						icon: "success",
-						});
+                        });
+                        $('body').append('<meta http-equiv="refresh" content="2;" />');
 					},
 					error : (error) => {
 						swal("Gagal Menghapus Bulan!", {
@@ -131,10 +132,28 @@ $('document').ready(() => {
 				})
 				
 			} else {
-				swal("Batal Menghapus BQ!");
+				swal("Batal Menghapus Bulan!");
 			}
 		});
 
-		});
+        });
+        
+        $("h4[id=nilai_tender]").each(function(){
+           $(this).html( convertToRupiah ( parseInt( $(this).text() ) ) );
+        });
+
+        $("td[id=total_nominal]").each(function(){
+           $(this).html( convertToRupiah ( parseInt( $(this).text() ) ) );
+        });
+
+        function convertToRupiah(angka)
+        {
+            var rupiah = '';		
+            var angkarev = angka.toString().split('').reverse().join('');
+            for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+            return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
+        }
+
+
     })
 </script>

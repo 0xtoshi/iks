@@ -37,7 +37,7 @@
 												@each(data in data_bq) 
 												<tr id="bq_{{ data.id }}">
 													<td>{{ data.nama }}</td>
-													<td>{{ data.nilai }}</td>
+													<td id="nilai_tender">{{ data.nilai }}</td>
 													<td>{{ data.instansi }}</td>
 													<td>{{ data.lama_tender }}</td>
 													<td>
@@ -102,5 +102,17 @@
 		});
 
 		});
+
+		$("td[id=nilai_tender]").each(function(){
+           $(this).html( convertToRupiah ( parseInt( $(this).text() ) ) );
+        });
+
+        function convertToRupiah(angka)
+        {
+            var rupiah = '';		
+            var angkarev = angka.toString().split('').reverse().join('');
+            for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+            return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
+        }
 	})
 </script>
