@@ -39,6 +39,7 @@ Route.on('/').render('welcome')
  
  
  Route.post('Api/TambahSuratPenerimaan','TenderController.TambahSuratPenerimaan')
+ Route.post('Api/DeleteSuratPenerimaan','TenderController.DeleteSuratPenerimaan')
  
 
 

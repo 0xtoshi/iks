@@ -69,6 +69,20 @@ class TenderController {
         return response.status(200).json({ status : 200 , msg : 'Sukses Menyimpan Tender!' })
     }
 
+    async DeleteSuratPenerimaan({request , response, session})
+    {
+        var post = request.all()
+        let id_bq = post.id_bq
+        let bulan = post.bulan
+
+        await Tender.query()
+        .where('id_bq', id_bq)
+        .where('bulan', bulan)
+        .delete()
+
+        return response.status(200).json({ status : 200 , msg : 'Sukses Menghapus Surat Penerimaan!' })
+    }
+
 }
 
 module.exports = TenderController

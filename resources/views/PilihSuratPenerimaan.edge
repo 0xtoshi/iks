@@ -58,7 +58,7 @@
 											<thead>
 												<tr>
 													<th>Bulan</th>
-													<th>Nominal</th>
+													<th style="width: 70%">Nominal</th>
 													<th>Tools</th>
 													
 												</tr>
@@ -68,9 +68,9 @@
 												<tr id="tender_{{ id }}">
 													<td>{{ data.bulan }}</td>
 													<td>{{ data.nominal }}</td>
-													<td>
-                                                    <a href="/surat_penerimaan/id/{{ id }}" class="btn btn-info" type="button">Edit!</a>
-                                                    <a href="/surat_penerimaan/id/{{ id }}" class="btn btn-danger" type="button">Delete!</a>
+													<td class="text-left">
+                                                    <a href="/surat_penerimaan/id/{{ id }}" class="btn btn-info" type="button"><i class="fa fa-edit"></i> Edit!</a>
+                                                    <button name="deleteBulan" id="{{ data.bulan }}" value="{{ data_bq.id }}" type="button" class="btn btn-danger"><i class="fa fa-trash"></i>Delete!</button>
                                                     <a href="/surat_penerimaan/id/{{ id }}" class="btn btn-success" type="button">Pilih!</a>
 													</td>
                                                 </tr>
@@ -100,3 +100,41 @@
 		<!-- /Main Wrapper -->
 		
 @include('BqLayout/footer')
+
+<script>
+$('document').ready(() => {
+		console.log('READY!')
+		$("button[name=deleteBulan]").click(function() {
+			swal({
+			title: "Apakah anda yakin?",
+			text: "Akan menghapus Bulan = "+this.id,
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+			})
+			.then((willDelete) => {
+			if (willDelete) {
+				$.ajax({
+					url : '/Api/DeleteSuratPenerimaan/',
+                    method : 'POST',
+                    data : { id_bq : this.value, bulan : this.id },
+					success : (data) => { 
+						swal("Sukses Menghapus Bulan"+this.id, {
+						icon: "success",
+						});
+					},
+					error : (error) => {
+						swal("Gagal Menghapus Bulan!", {
+						icon: "error",
+						});
+					}
+				})
+				
+			} else {
+				swal("Batal Menghapus BQ!");
+			}
+		});
+
+		});
+    })
+</script>
