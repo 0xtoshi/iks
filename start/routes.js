@@ -16,8 +16,11 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.on('/').render('welcome')
+  Route.get('/', ({response, session}) => {
 
+    return response.redirect('/dashboard', false, 301)
+  
+  })
 /**
  * ADMIN ROUTE
  */
@@ -42,6 +45,7 @@ Route.on('/').render('welcome')
     Route.post('Api/TambahSuratPenerimaan','TenderController.TambahSuratPenerimaan')
     Route.post('Api/DeleteSuratPenerimaan','TenderController.DeleteSuratPenerimaan')
     Route.post('Api/UpdateSuratPenerimaan','TenderController.UpdateSuratPenerimaan')
+    Route.get('Api/BulanTender/:id','TenderController.getBulanTender').as('id')
     }).middleware(['Otentifikasi'])
 
  /**

@@ -251,11 +251,10 @@
             success : (data) => {
                
                swal("Sukses!", data.msg , "success");
-
-               $('body').append('<meta http-equiv="refresh" content="2;url=/bq" />');
+               setTimeout("window.location.href='/bq';",1000);
             },
             error : (error) => {
-               $('#notice').html('<div class="alert alert-danger">Gagal Menyimpan BQ Tender Pastikan Form sudah diisi dengan benar!</div>')
+               swal("Error!", "Gagal Menyimpan BQ Tender Pastikan Form sudah diisi dengan benar!" , "error");
             }
          })
 

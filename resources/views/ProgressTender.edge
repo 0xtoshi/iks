@@ -54,9 +54,9 @@
 													<td id="nilai_tender">{{ data.nilai }}</td>
 													<td>{{ data.instansi }}</td>
 													<td>{{ data.lama_tender }}</td>
-													<td>
+													<td class="canvas_chart" id="{{ data.id }}">
 														
-															<canvas style="width: 150px; height: 150px;" id="chart"></canvas>
+													<canvas style="width: 150px; height: 150px;" id="chart_{{ data.id }}"></canvas>
 														
 													</td>
 													<td>
@@ -85,6 +85,9 @@
 
 <script>
 
+		$('document').ready( () => {
+
+
 		$("td[id=nilai_tender]").each(function(){
 				$(this).html( convertToRupiah ( parseInt( $(this).text() ) ) );
 		});
@@ -97,24 +100,42 @@
             return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
 		}
 		
-		$('document').ready(function(){
-			
-			new Chart(document.getElementById("chart"), {
-			type: 'pie',
-			data: {
-			labels: ["Bulan", "Sisa Bulan"],
-			datasets: [{
-				backgroundColor: ["#27ae60", "#e74c3c"],
-				data: [12,1]
-			}]
-			},
-			options: {
-				responsive: false,
-				legend: {
-					display: false
+
+
+		$("td[class=canvas_chart]").each(function(){
+			$.ajax({
+				url : '/Api/BulanTender/'+this.id,
+				method : 'GET',
+				dataType : 'JSON',
+				success : function(data)
+				{
+					var ctx = 'chart_'+data.id
+					CreateChart(ctx,data.label,data.data)
+					
+					
 				}
-			}
+			})
 		});
 
-		})
+		function CreateChart(ctx,label,data){
+			new Chart(document.getElementById(ctx), {
+						type: 'pie',
+						data: {
+						labels: label,
+						datasets: [{
+							backgroundColor: ["#27ae60", "#e74c3c"],
+							data: data
+						}]
+						},
+						options: {
+						responsive: false,
+						legend: {
+							display: false
+					}
+				}
+			});
+		}
+
+	})
+
 </script>

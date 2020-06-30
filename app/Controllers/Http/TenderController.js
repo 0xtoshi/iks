@@ -1,5 +1,7 @@
 'use strict'
 
+const { get } = require("@adonisjs/framework/src/Route/Manager")
+
 const BQ = use('App/Models/Bq')
 const InputFile = use('App/Models/InputFile')
 const Lain2 = use('App/Models/Lain2')
@@ -110,6 +112,31 @@ class TenderController {
         }
 
         return response.status(200).json({ status : 200 , msg : 'Sukses Mengupdate Surat Penerimaan!' })
+    }
+
+    async getBulanTender({request, response, session})
+    {
+        var id_bq = request.params.id
+        let getBulan = await Tender.query()
+        .where('tenders.id_bq', id_bq)
+        .leftJoin('bqs','tenders.id_bq','bqs.id')
+        .select('bqs.lama_tender','tenders.bulan', 'bqs.id')
+        .orderBy('tenders.bulan','DESC')
+        .limit(1)
+        .fetch()
+
+        if(getBulan){
+           
+            var data = getBulan.toJSON()
+            var sisa_bulan = (Number(data[0].lama_tender) - Number(data[0].bulan))
+            var output = {
+                id : data[0].id,
+                label : [ 'Bulan', 'Sisa Bulan' ],
+                data : [ data[0].bulan , sisa_bulan]
+            }
+        }
+
+        return response.status(200).json(output)
     }
 
 }

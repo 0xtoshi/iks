@@ -272,10 +272,10 @@
             data : tender_param,
             success : (data) => {
                swal("Sukses!", data.msg , "success");
-               $('body').append('<meta http-equiv="refresh" content="2;url=/surat_penerimaan/id/{{ BQS.id }}" />');
+               setTimeout("window.location.href='/surat_penerimaan/id/{{ BQS.id }}';",1000);
             },
             error : (error) => {
-               $('#notice').html('<div class="alert alert-danger">Gagal Menyimpan BQ Tender Pastikan Form sudah diisi dengan benar!</div>')
+               swal("Error!", "Gagal Menyimpan Surat Penerimaan! Pastikan Form sudah diisi dengan benar!" , "error");
             }
          })
 

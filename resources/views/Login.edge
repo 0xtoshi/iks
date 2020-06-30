@@ -120,7 +120,7 @@
 						success : (data) => {
                            
                             swal("Sukses!", data.msg , "success");
-                            $('body').append('<meta http-equiv="refresh" content="2;url=/dashboard" />');
+                            setTimeout("window.location.href='/dashboard';",1000);
 						},
 						error : (e) => {
 							var callback = e.responseJSON

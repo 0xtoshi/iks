@@ -126,7 +126,7 @@ $('document').ready(() => {
 						swal("Sukses Menghapus Bulan"+this.id, {
 						icon: "success",
                         });
-                        $('body').append('<meta http-equiv="refresh" content="2;" />');
+                        setTimeout("window.location.reload();",1000);
 					},
 					error : (error) => {
 						swal("Gagal Menghapus Bulan!", {

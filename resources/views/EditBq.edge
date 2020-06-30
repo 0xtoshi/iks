@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div id="notice"></div>
-                                    <form id="tambah_bq">
+                                    <form id="update_bq">
                                     <input type="hidden" name="id" value="{{ BQS.id }}">
                                        <div class="FORM-TENDER">
                                         <div class="form-group row">
@@ -300,11 +300,11 @@
       });
 
 
-      $('#tambah_bq').submit((e) => {
+      $('#update_bq').submit((e) => {
 
          e.preventDefault()
 
-         var tender_param = $('#tambah_bq').serializeFormJSON()
+         var tender_param = $('#update_bq').serializeFormJSON()
          console.log(tender_param)
 
          $.ajax({
@@ -313,11 +313,16 @@
             method : 'POST',
             data : tender_param,
             success : (data) => {
-               $('#notice').html('<div class="alert alert-success">'+data.msg+'</div>')
-               $('body').append('<meta http-equiv="refresh" content="2">');
+               swal(data.msg, {
+						icon: "success",
+						});
+                  setTimeout("window.location.href='/bq';",1000);
             },
             error : (error) => {
-               $('#notice').html('<div class="alert alert-danger">Gagal Menyimpan BQ Tender Pastikan Form sudah diisi dengan benar!</div>')
+               
+               swal('Gagal Menyimpan BQ Tender Pastikan Form sudah diisi dengan benar!', {
+						icon: "error",
+						});
             }
          })
 
@@ -341,7 +346,7 @@
 						swal("Sukses Menghapus Personil!", {
 						icon: "success",
 						});
-						$('body').append('<meta http-equiv="refresh" content="1">');
+						setTimeout("window.location.reload();",1000);
 					},
 					error : (error) => {
 						swal("Gagal Menghapus Personil!", {
@@ -374,7 +379,7 @@
 						swal("Sukses Menghapus Perlengkapan!", {
 						icon: "success",
 						});
-						$('body').append('<meta http-equiv="refresh" content="1">');
+						setTimeout("window.location.reload();",1000);
 					},
 					error : (error) => {
 						swal("Gagal Menghapus Perlengkapan!", {
@@ -407,7 +412,7 @@
 						swal("Sukses Menghapus Lain-Lain!", {
 						icon: "success",
 						});
-						$('body').append('<meta http-equiv="refresh" content="1">');
+                  setTimeout("window.location.reload();",1000);
 					},
 					error : (error) => {
 						swal("Gagal Menghapus Lain-Lain!", {
