@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "fa363114-dcad-48c8-b82e-720457f9a26b",
+		"name": "IKS API",
+		"description": "IKS WEB API JS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TambahMember",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3333/Api/AddMember?username=dwika&pass=anu123&nama=Dwika Nur Arifin&jabatan=Lelang",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"Api",
+						"AddMember"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "dwika"
+						},
+						{
+							"key": "pass",
+							"value": "anu123"
+						},
+						{
+							"key": "nama",
+							"value": "Dwika Nur Arifin"
+						},
+						{
+							"key": "jabatan",
+							"value": "Lelang"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3333/Api/Login?username=dwika&pass=anu123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"Api",
+						"Login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "dwika"
+						},
+						{
+							"key": "pass",
+							"value": "anu123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSessionLogin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3333/Api/Session",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"Api",
+						"Session"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TambahBQTender",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3333/Api/TambahBQ?nama=Ngaah&nilai=50000&instansi=NgaahCorp&lama_tender=12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"Api",
+						"TambahBQ"
+					],
+					"query": [
+						{
+							"key": "nama",
+							"value": "Ngaah"
+						},
+						{
+							"key": "nilai",
+							"value": "50000"
+						},
+						{
+							"key": "instansi",
+							"value": "NgaahCorp"
+						},
+						{
+							"key": "lama_tender",
+							"value": "12"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TambahPersonil",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3333/Api/TambahPersonil?jabatan=CEO&gaji=7000000&jumlah=5&id_bq=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"Api",
+						"TambahPersonil"
+					],
+					"query": [
+						{
+							"key": "jabatan",
+							"value": "CEO"
+						},
+						{
+							"key": "gaji",
+							"value": "7000000"
+						},
+						{
+							"key": "jumlah",
+							"value": "5"
+						},
+						{
+							"key": "id_bq",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TambahPerlengkapan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3333/Api/TambahPerlengkapan?nama=Seragam&nominal=500000&jumlah=13&id_bq=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"Api",
+						"TambahPerlengkapan"
+					],
+					"query": [
+						{
+							"key": "nama",
+							"value": "Seragam"
+						},
+						{
+							"key": "nominal",
+							"value": "500000"
+						},
+						{
+							"key": "jumlah",
+							"value": "13"
+						},
+						{
+							"key": "id_bq",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TambahLainLain",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3333/Api/TambahLain2?nama=Seragam&nominal=500000&jumlah=13&id_bq=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"Api",
+						"TambahLain2"
+					],
+					"query": [
+						{
+							"key": "nama",
+							"value": "Seragam"
+						},
+						{
+							"key": "nominal",
+							"value": "500000"
+						},
+						{
+							"key": "jumlah",
+							"value": "13"
+						},
+						{
+							"key": "id_bq",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

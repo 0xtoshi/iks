@@ -1,0 +1,102 @@
+@include('BqLayout/head')
+    <body>
+	
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+		
+			<!-- Header -->
+            @include('BqLayout/navbar')
+			<!-- /Sidebar -->
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+				
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="/surat_penerimaan">Surat Penerimaan</a></li>
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+					
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title text-center">SURAT PENERIMAAN TENDER</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-2"><h4> Nama Tender : </h4></div>
+                                        <div class="col-sm-3"><h4> {{data_bq.nama}} </h4></div>
+                                    </div>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-sm-2"><h4>Nilai Tender  : </h4></div>
+                                        <div class="col-sm-3"><h4>{{data_bq.nilai}} </h4></div>
+                                    </div>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-sm-2"><h4>Nama Instansi : </h4></div>
+                                        <div class="col-sm-6"><h4>{{data_bq.instansi}} </h4></div>
+                                    </div>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-sm-2"><h4>Lama Tender : </h4></div>
+                                        <div class="col-sm-6"><h4>{{data_bq.lama_tender}} (Bulan) </h4></div>
+                                    </div> 
+                                    
+                                    <div class="table-responsive">
+										<table class="table table-stripped">
+											<thead>
+												<tr>
+													<th>Bulan</th>
+													<th>Nominal</th>
+													<th>Tools</th>
+													
+												</tr>
+											</thead>
+											<tbody>
+												@each(data in data_tender)
+												<tr id="tender_{{ id }}">
+													<td>{{ data.bulan }}</td>
+													<td>{{ data.nominal }}</td>
+													<td>
+                                                    <a href="/surat_penerimaan/id/{{ id }}" class="btn btn-info" type="button">Edit!</a>
+                                                    <a href="/surat_penerimaan/id/{{ id }}" class="btn btn-danger" type="button">Delete!</a>
+                                                    <a href="/surat_penerimaan/id/{{ id }}" class="btn btn-success" type="button">Pilih!</a>
+													</td>
+                                                </tr>
+                                                @endeach
+                                                
+                                               
+											</tbody>
+											
+                                        </table>
+                                        <div align="right">
+                                        <a href="/surat_penerimaan/tambah/{{ id }}" class="btn btn-info" type="button"><i class="fa fa-plus"></i>Tambah</a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                    
+                                </div>
+                            </div>
+						</div>			
+					</div>
+					
+				</div>			
+			</div>
+			<!-- /Page Wrapper -->
+		
+        </div>
+		<!-- /Main Wrapper -->
+		
+@include('BqLayout/footer')

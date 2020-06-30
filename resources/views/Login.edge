@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Login</title>
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="/template/images/favicon.ico" />
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="/template/css/bootstrap.min.css">
+	<!-- Typography CSS -->
+	<link rel="stylesheet" href="/template/css/typography.css">
+	<!-- Style CSS -->
+	<link rel="stylesheet" href="/template/css/style.css">
+	<!-- Responsive CSS -->
+	<link rel="stylesheet" href="/template/css/responsive.css">
+ </head>
+    <body>
+		<section class="sign-in-page">
+            <div class="container sign-in-page-bg mt-5 p-0">
+                <div class="row no-gutters">
+                    <div class="col-md-6 text-center">
+                        <div class="sign-in-detail text-white">
+                            <img src="/assets/img/iks1.png" class="img-fluid" alt="logo">
+                        </div>
+                    </div>
+                    <div class="col-md-6 position-relative">
+                        <div class="sign-in-from">
+                            <h1 class="mb-0">Login</h1>
+                            <p>Login untuk mengakses Sistem Informasi Budget Tender.</p>
+                            <form class="mt-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Username</label>
+                                    <input class="form-control" name="username" type="text" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input class="form-control" name="pass" type="password" placeholder="Password">
+                                </div>
+                                <div class="d-inline-block w-100">
+                                    <div class="custom-control custom-checkbox d-inline-block mt-2 pt-1">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <label class="custom-control-label" for="customCheck1">Remember Me</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary float-right">Sign in</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+		<!-- Main Wrapper -->
+		<!-- /Main Wrapper -->
+		
+		<!-- jQuery -->
+		<script src="/template/js/jquery.min.js"></script>
+      <script src="/template/js/popper.min.js"></script>
+      <script src="/template/js/bootstrap.min.js"></script>
+      <!-- Appear JavaScript -->
+      <script src="/template/js/jquery.appear.js"></script>
+      <!-- Countdown JavaScript -->
+      <script src="/template/js/countdown.min.js"></script>
+      <!-- Counterup JavaScript -->
+      <script src="/template/js/waypoints.min.js"></script>
+      <script src="/template/js/jquery.counterup.min.js"></script>
+      <!-- Wow JavaScript -->
+      <script src="/template/js/wow.min.js"></script>
+      <!-- Apexcharts JavaScript -->
+      <script src="/template/js/apexcharts.js"></script>
+      <!-- Slick JavaScript -->
+      <script src="/template/js/slick.min.js"></script>
+      <!-- Select2 JavaScript -->
+      <script src="/template/js/select2.min.js"></script>
+      <!-- Owl Carousel JavaScript -->
+      <script src="/template/js/owl.carousel.min.js"></script>
+      <!-- Magnific Popup JavaScript -->
+      <script src="/template/js/jquery.magnific-popup.min.js"></script>
+      <!-- Smooth Scrollbar JavaScript -->
+      <script src="/template/js/smooth-scrollbar.js"></script>
+      <!-- Chart Custom JavaScript -->
+      <script src="/template/js/chart-custom.js"></script>
+      <!-- Custom JavaScript -->
+      <script src="/template/js/custom.js"></script>
+		<script>
+			(function ($) {
+				$.fn.serializeFormJSON = function () {
+
+					var o = {};
+					var a = this.serializeArray();
+					$.each(a, function () {
+						if (o[this.name]) {
+							if (!o[this.name].push) {
+								o[this.name] = [o[this.name]];
+							}
+							o[this.name].push(this.value || '');
+						} else {
+							o[this.name] = this.value || '';
+						}
+					});
+					return o;
+				};
+			})(jQuery);
+
+			$('document').ready(() => {
+
+				$('#login').submit((e) => {
+					e.preventDefault()
+					$('#login-notice').empty()
+					var param = $('#login').serializeFormJSON()
+					$.ajax({
+						url : '/Api/Login',
+						dataType : 'JSON',
+						data : param,
+						method : 'POST',
+						success : (data) => {
+							$('#login-notice').html('<div class="alert alert-success">'+data.msg+'</div>')
+						},
+						error : (e) => {
+							var callback = e.responseJSON
+							$.each(callback.msg, (key, value) => {
+								console.log(value)
+								$('#login-notice').append('<div class="alert alert-danger">'+value.message+'</div>')
+							})
+							
+						}
+					})
+				})
+
+			})
+
+		</script>
+		
+    </body>
+</html>

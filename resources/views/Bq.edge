@@ -1,0 +1,106 @@
+@include('BqLayout/head')
+    <body>
+	
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+		
+			<!-- Header -->
+            @include('BqLayout/navbar')
+			<!-- /Sidebar -->
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card">
+                                <div class="card-header">
+									<h4 class="card-title text-center">TABEL DAFTAR TENDER</h4>
+									<br/>
+									<a href="/bq/tambah" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah BQ </a>
+									
+                                </div>
+                                <div class="card-body">
+									
+                                    <div class="table-responsive">
+										<table class="datatable table table-stripped">
+											<thead>
+												<tr>
+													<th>Nama Tender</th>
+													<th>Nilai Tender</th>
+													<th>Nama Instansi</th>
+													<th>Lama Bulan</th>
+													<th>Alat</th>
+												</tr>
+											</thead>
+											<tbody>
+												@each(data in data_bq) 
+												<tr id="bq_{{ data.id }}">
+													<td>{{ data.nama }}</td>
+													<td>{{ data.nilai }}</td>
+													<td>{{ data.instansi }}</td>
+													<td>{{ data.lama_tender }}</td>
+													<td>
+													<a href="/bq/edit/{{ data.id }}" class="btn btn-info" type="button">Edit</a>
+													<button name="deleteBQ" value="{{ data.nama }}" id="{{ data.id }}" class="btn btn-danger" type="button">Delete</button>
+													</td>
+												</tr>
+												@endeach
+											</tbody>
+										</table>
+									</div>
+                                </div>
+                            </div>
+						</div>			
+					</div>
+					
+				</div>			
+			</div>
+			<!-- /Page Wrapper -->
+		
+        </div>
+		<!-- /Main Wrapper -->
+		
+@include('BqLayout/footer')
+
+<script>
+	$('document').ready(() => {
+
+		
+
+
+		console.log('READY!')
+		$("button[name=deleteBQ]").click(function() {
+			swal({
+			title: "Apakah anda yakin?",
+			text: "Akan menghapus BQ = "+this.value,
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+			})
+			.then((willDelete) => {
+			if (willDelete) {
+				$.ajax({
+					url : '/Api/DeleteBq/'+this.id,
+					method : 'GET',
+					success : (data) => { 
+						swal("Sukses Menghapus BQ!", {
+						icon: "success",
+						});
+						$('#bq_'+this.id).remove()
+					},
+					error : (error) => {
+						swal("Gagal Menghapus BQ!", {
+						icon: "error",
+						});
+					}
+				})
+				
+			} else {
+				swal("Batal Menghapus BQ!");
+			}
+		});
+
+		});
+	})
+</script>
