@@ -235,7 +235,7 @@ module.exports = {
   |
   */
   cookie: {
-    httpOnly: true,
+    httpOnly: false,
     sameSite: false,
     path: '/',
     maxAge: 7200

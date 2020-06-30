@@ -106,7 +106,7 @@ class UiController {
         return View.render('EditSuratPenerimaan',{BQS, Personils, Perlengkapans, Lain2s, session_data : getSessionData})
     }
 
-    async Login({ request, response , session}){
+    async Login(){
         
         return View.render('Login')
     }

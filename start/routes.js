@@ -15,19 +15,23 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
+  Route.post('Api/AddMember','BqController.TambahMember')
+  Route.post('Api/Login','BqController.MemberLogin')
+  Route.get('/login','UiController.Login')
 
   Route.get('/', ({response, session}) => {
-
-    return response.redirect('/dashboard', false, 301)
-  
+    response.json({ msg : 'Welcome to IKS BQ' })
   })
+  
+  
 /**
  * ADMIN ROUTE
  */
 
-    Route.post('Api/AddMember','BqController.TambahMember')
-    Route.post('Api/Login','BqController.MemberLogin')
+    
+    
     Route.group(() => {
+    
     Route.get('Api/Session','BqController.getSessionMember')
     Route.post('Api/TambahBQ','BqController.TambahBq')
     Route.post('Api/TambahPersonil','BqController.TambahPersonil')
@@ -51,7 +55,7 @@ const Route = use('Route')
  /**
   * UI CONTROLLER
   */
-    Route.get('login','UiController.Login')
+    
 
     Route.group(() => {
     Route.get('dashboard','UiController.Dashboard')

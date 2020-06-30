@@ -14,9 +14,11 @@ class Otentifikasi {
     var sessions = session.get('HasSession')
     if(sessions !== true)
     {
-        return response.redirect('/login', false, 301)
+        response.redirect('/login', false, 301)
+    }else{
+      await next(request)
     }
-    await next(request)
+    
   }
 
 }
