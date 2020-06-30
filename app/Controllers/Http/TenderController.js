@@ -26,8 +26,7 @@ class TenderController {
         }else{
             var newBulan = Number(getBulan.bulan) + 1
         }
-
-        console.log(getBulan)
+        
         var id_personil = post.id_personil
         var personil_gaji  = post.personil_gaji
         var personil_terpenuhi = post.personil_terpenuhi

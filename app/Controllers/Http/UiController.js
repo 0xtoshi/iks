@@ -38,7 +38,7 @@ class UiController {
                             .select(Database.raw('SUM(`nominal`) AS total_nominal'))
                             .groupBy('bulan')
                             .fetch()
-        console.log(getTender.toJSON())
+        
         return View.render('PilihSuratPenerimaan', { data_bq : getBQData.toJSON() , id : id , data_tender : getTender.toJSON() , session_data : getSessionData })
     }
 
@@ -102,7 +102,7 @@ class UiController {
         const Personils = getPersonil.toJSON()
         const Perlengkapans = getPerlengkapan.toJSON()
         const Lain2s = getLain2.toJSON()
-        console.log(Lain2s)
+        
         return View.render('EditSuratPenerimaan',{BQS, Personils, Perlengkapans, Lain2s, session_data : getSessionData})
     }
 
@@ -132,7 +132,7 @@ class UiController {
                             .select(Database.raw('SUM(`nominal`) AS total_nominal'))
                             .groupBy('bulan')
                             .fetch()
-        console.log(getTender.toJSON())
+        
         return View.render('PilihInvoice', { data_bq : getBQData.toJSON() , id : id , data_tender : getTender.toJSON() , session_data : getSessionData })
     }
 
@@ -168,7 +168,7 @@ class UiController {
                             .select(Database.raw('SUM(`nominal`) AS total_nominal'))
                             .groupBy('bulan')
                             .fetch()
-        console.log(getTender.toJSON())
+        
         return View.render('PilihInputSuratLaporan', { data_bq : getBQData.toJSON() , id : id , data_tender : getTender.toJSON() , session_data : getSessionData })
     }
 
