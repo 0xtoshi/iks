@@ -62,7 +62,7 @@ Route.on('/').render('welcome')
     Route.get('invoice/id/:id','UiController.PilihInvoice').as('id')
     Route.get('input_surat_laporan','UiController.InputSuratLaporan')
     Route.get('input_surat_laporan/id/:id','UiController.PilihInputSuratLaporan').as('id')
-    Route.get('tender_selesai','UiController.SuratPenerimaan')
+    Route.get('tender_selesai','UiController.SuratTenderSelesai')
     Route.get('progress_tender','UiController.SuratPenerimaan')
     }).middleware(['Otentifikasi'])
 

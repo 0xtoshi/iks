@@ -1,0 +1,92 @@
+@include('BqLayout/head')
+    <body>
+	
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+		
+			<!-- Header -->
+            @include('BqLayout/navbar')
+			<!-- /Sidebar -->
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+				
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="/tender_selesai">Surat Tender Selesai</a></li>
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+					
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title text-center">SURAT TENDER Selesai</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+										<table class="datatable table table-stripped">
+											<thead>
+												<tr>
+													<th>Nama Tender</th>
+													<th>Nilai Tender</th>
+													<th>Nama Instansi</th>
+													<th>Lama Bulan</th>
+													<th>Alat</th>
+												</tr>
+											</thead>
+											<tbody>
+												@each(data in data_bq) 
+												<tr id="bq_{{ data.id }}">
+													<td>{{ data.nama }}</td>
+													<td id="nilai_tender">{{ data.nilai }}</td>
+													<td>{{ data.instansi }}</td>
+													<td>{{ data.lama_tender }}</td>
+													<td>
+													<button href="/surat_penerimaan/id/{{ data.id }}" class="btn btn-info" type="button"> <i class="fa fa-print"></i> Cetak!</button>
+													
+													</td>
+												</tr>
+												@endeach
+											</tbody>
+										</table>
+									</div>
+                                </div>
+                            </div>
+						</div>			
+					</div>
+					
+				</div>			
+			</div>
+			<!-- /Page Wrapper -->
+		
+        </div>
+		<!-- /Main Wrapper -->
+		
+@include('BqLayout/footer')
+
+
+<script>
+
+		$("td[id=nilai_tender]").each(function(){
+				$(this).html( convertToRupiah ( parseInt( $(this).text() ) ) );
+		});
+
+        function convertToRupiah(angka)
+        {
+            var rupiah = '';		
+            var angkarev = angka.toString().split('').reverse().join('');
+            for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+            return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
+        }
+
+</script>

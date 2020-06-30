@@ -171,6 +171,13 @@ class UiController {
         console.log(getTender.toJSON())
         return View.render('PilihInputSuratLaporan', { data_bq : getBQData.toJSON() , id : id , data_tender : getTender.toJSON() , session_data : getSessionData })
     }
+
+    async SuratTenderSelesai({ request, response, session})
+    {
+        const getDataBQ = await BQ.all()
+        const getSessionData = session.get('SessionLogin')
+        return View.render('SuratTenderSelesai', { data_bq : getDataBQ.toJSON(), session_data : getSessionData})
+    }
 }
 
 module.exports = UiController
