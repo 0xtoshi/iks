@@ -122,6 +122,20 @@ class UiController {
         return View.render('Invoice', { session_data : getSessionData, data_bq : getDataBQ.toJSON() })
     }
 
+    async PilihInvoice({request, response, session}){
+        var id = request.params.id
+        const getSessionData = session.get('SessionLogin')
+        const getBQData = await BQ.find(id)
+        const getTender = await Tender.query()
+                            .where('id_bq', id)
+                            .select('*')
+                            .select(Database.raw('SUM(`nominal`) AS total_nominal'))
+                            .groupBy('bulan')
+                            .fetch()
+        console.log(getTender.toJSON())
+        return View.render('PilihInvoice', { data_bq : getBQData.toJSON() , id : id , data_tender : getTender.toJSON() , session_data : getSessionData })
+    }
+
     async EditBQ({request, response, session}){
         const getSessionData = session.get('SessionLogin')
         var id = request.params.id
@@ -136,6 +150,26 @@ class UiController {
         
   
         return View.render('EditBq',{BQS, Personils, Perlengkapans, Lain2s, session_data : getSessionData})
+    }
+
+    async InputSuratLaporan({request, response, session}){
+        const getDataBQ = await BQ.all()
+        const getSessionData = session.get('SessionLogin')
+        return View.render('InputSuratLaporan', { data_bq : getDataBQ.toJSON(), session_data : getSessionData})
+    }
+
+    async PilihInputSuratLaporan({request, response, session}){
+        var id = request.params.id
+        const getSessionData = session.get('SessionLogin')
+        const getBQData = await BQ.find(id)
+        const getTender = await Tender.query()
+                            .where('id_bq', id)
+                            .select('*')
+                            .select(Database.raw('SUM(`nominal`) AS total_nominal'))
+                            .groupBy('bulan')
+                            .fetch()
+        console.log(getTender.toJSON())
+        return View.render('PilihInputSuratLaporan', { data_bq : getBQData.toJSON() , id : id , data_tender : getTender.toJSON() , session_data : getSessionData })
     }
 }
 

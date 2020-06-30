@@ -52,7 +52,7 @@
 													<td>{{ data.instansi }}</td>
 													<td>{{ data.lama_tender }}</td>
 													<td>
-													<a href="/surat_penerimaan/id/{{ data.id }}" class="btn btn-info" type="button">Pilih!</a>
+													<a href="/invoice/id/{{ data.id }}" class="btn btn-info" type="button">Pilih!</a>
 													
 													</td>
 												</tr>
@@ -74,8 +74,9 @@
 		
 @include('BqLayout/footer')
 
+
 <script>
-	#('document').ready(function(){ 
+
 		$("td[id=nilai_tender]").each(function(){
 				$(this).html( convertToRupiah ( parseInt( $(this).text() ) ) );
 		});
@@ -86,6 +87,6 @@
             var angkarev = angka.toString().split('').reverse().join('');
             for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
             return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
-		}
-	})
-<script>
+        }
+
+</script>

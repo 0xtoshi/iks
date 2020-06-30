@@ -1,0 +1,121 @@
+@include('BqLayout/head')
+    <body>
+	
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+		
+			<!-- Header -->
+            @include('BqLayout/navbar')
+			<!-- /Sidebar -->
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+				
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="/invoice">Invocie</a></li>
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+					
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card">
+								
+                                <div class="card-header">
+									<a href="/invoice" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Kembali </a>
+                                    <h4 class="card-title text-center">Invoice</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-2"><h4> Nama Tender : </h4></div>
+                                        <div class="col-sm-3"><h4> {{data_bq.nama}} </h4></div>
+                                    </div>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-sm-2"><h4>Nilai Tender  : </h4></div>
+                                        <div class="col-sm-3"><h4 id="nilai_tender">{{data_bq.nilai}} </h4></div>
+                                    </div>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-sm-2"><h4>Nama Instansi : </h4></div>
+                                        <div class="col-sm-6"><h4>{{data_bq.instansi}} </h4></div>
+                                    </div>
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-sm-2"><h4>Lama Tender : </h4></div>
+                                        <div class="col-sm-6"><h4>{{data_bq.lama_tender}} (Bulan) </h4></div>
+                                    </div> 
+                                    
+                                    <br/><br/>
+                                    <div class="table-responsive">
+										<table class="table table-stripped">
+											<thead>
+												<tr>
+													<th>Bulan</th>
+													<th style="width: 60%">Nominal</th>
+													<th>Tools</th>
+													
+												</tr>
+											</thead>
+											<tbody>
+												@each(data in data_tender)
+												<tr id="tender_{{ id }}">
+													<td>{{ data.bulan }}</td>
+													<td id="total_nominal"> {{ data.total_nominal }} </td>
+													<td class="text-left">
+                                                    <button class="btn btn-success" type="button"><i class="fa fa-print"></i> Cetak!</button>
+													</td>
+                                                </tr>
+                                                @endeach
+                                                
+                                               
+											</tbody>
+											
+                                        </table>
+                                       
+                                    </div>
+                                    
+                                </div>
+                                    
+                                </div>
+                            </div>
+						</div>			
+					</div>
+					
+				</div>			
+			</div>
+			<!-- /Page Wrapper -->
+		
+        </div>
+		<!-- /Main Wrapper -->
+		
+@include('BqLayout/footer')
+
+<script>
+$('document').ready(() => {
+		console.log('READY!')
+		
+        $("td[id=total_nominal]").each(function(){
+           $(this).html( convertToRupiah ( parseInt( $(this).text() ) ) );
+        });
+
+        function convertToRupiah(angka)
+        {
+            var rupiah = '';		
+            var angkarev = angka.toString().split('').reverse().join('');
+            for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+            return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
+        }
+
+
+    })
+</script>
