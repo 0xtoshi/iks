@@ -45,20 +45,18 @@
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>Tiger Nixon</td>
-													<td>System Architect</td>
-													<td>Edinburgh</td>
-													<td>61</td>
-													<td><a class="btn btn-info" href="">Pilih!</a></td>
+												@each(data in data_bq) 
+												<tr id="bq_{{ data.id }}">
+													<td>{{ data.nama }}</td>
+													<td id="nilai_tender">{{ data.nilai }}</td>
+													<td>{{ data.instansi }}</td>
+													<td>{{ data.lama_tender }}</td>
+													<td>
+													<a href="/surat_penerimaan/id/{{ data.id }}" class="btn btn-info" type="button">Pilih!</a>
+													
+													</td>
 												</tr>
-												<tr>
-													<td>Garrett Winters</td>
-													<td>Accountant</td>
-													<td>Tokyo</td>
-													<td>63</td>
-													<td><a class="btn btn-info" href="">Pilih!</a></td>
-												</tr>
+												@endeach
 											</tbody>
 										</table>
 									</div>
@@ -75,3 +73,19 @@
 		<!-- /Main Wrapper -->
 		
 @include('BqLayout/footer')
+
+<script>
+	#('document').ready(function(){ 
+		$("td[id=nilai_tender]").each(function(){
+				$(this).html( convertToRupiah ( parseInt( $(this).text() ) ) );
+		});
+
+        function convertToRupiah(angka)
+        {
+            var rupiah = '';		
+            var angkarev = angka.toString().split('').reverse().join('');
+            for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+            return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
+		}
+	})
+<script>

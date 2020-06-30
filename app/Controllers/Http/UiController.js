@@ -117,8 +117,9 @@ class UiController {
     }
 
     async Invoice({request, response, session}){
+        const getDataBQ = await BQ.all()
         const getSessionData = session.get('SessionLogin')
-        return View.render('Invoice', { session_data : getSessionData })
+        return View.render('Invoice', { session_data : getSessionData, data_bq : getDataBQ.toJSON() })
     }
 
     async EditBQ({request, response, session}){
