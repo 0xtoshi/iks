@@ -107,7 +107,7 @@
                                              @if( $loop.index == 0 )
                                             <label> Terpenuhi </label>
                                             @endif
-                                            <input type="number" class="form-control" name="personil_terpenuhi[]"  id="personil_terpenuhi" placeholder="0" required>
+                                           <input type="number" class="form-control" name="personil_terpenuhi[]" value="{{ ( data.total_nominal / data.gaji ) }}" id="personil_terpenuhi" placeholder="0" required>
                                          </div> 
 
 
@@ -142,7 +142,7 @@
                                              @if( $loop.index == 0 )
                                               <label> Nominal (RP) </label>
                                              @endif
-                                              <input type="number" class="form-control" name="nominal_perlengkapan[]" value="{{ data.nominal }}" id="nominal_perlengkapan" placeholder="Nominal" readonly>
+                                              <input type="number" class="form-control" name="nominal_perlengkapan[]" value="{{ data.perlengkapan_nominal }}" id="nominal_perlengkapan" placeholder="Nominal" readonly>
                                            </div>
                                            <div class="col-sm-2">
                                              @if( $loop.index == 0 )
@@ -154,7 +154,7 @@
                                              @if( $loop.index == 0 )
                                             <label> Terpenuhi </label>
                                             @endif
-                                            <input type="number" class="form-control" name="perlengkapan_terpenuhi[]"  id="perlengkapan_terpenuhi" placeholder="0" required>
+                                            <input type="number" class="form-control" name="perlengkapan_terpenuhi[]" value="{{ ( data.total_nominal / data.perlengkapan_nominal ) }}" id="perlengkapan_terpenuhi" placeholder="0" required>
                                          </div> 
                                         </div>
                                         
@@ -189,7 +189,7 @@
                                              @if( $loop.index == 0 )
                                               <label> Nominal (RP) </label>
                                              @endif
-                                              <input type="number" id="nominal_lain2" name="nominal_lain2[]" value="{{ data.nominal }}" class="form-control" placeholder="Nominal" readonly>
+                                              <input type="number" id="nominal_lain2" name="nominal_lain2[]" value="{{ data.lain2_nominal }}" class="form-control" placeholder="Nominal" readonly>
                                            </div>
                                            <div class="col-sm-2">
                                              @if( $loop.index == 0 )
@@ -201,7 +201,7 @@
                                             @if( $loop.index == 0 )
                                             <label> Terpenuhi </label>
                                             @endif
-                                            <input type="number" class="form-control" name="lain2_terpenuhi[]" id="lain2_terpenuhi" placeholder="0" required>
+                                            <input type="number" class="form-control" name="lain2_terpenuhi[]" value="{{ ( data.total_nominal / data.lain2_nominal ) }}" id="lain2_terpenuhi" placeholder="0" required>
                                          </div> 
                                         </div>
                                         @endeach
