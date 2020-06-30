@@ -20,7 +20,11 @@ const Route = use('Route')
   Route.get('/login','UiController.Login')
 
   Route.get('/', ({response, session}) => {
-    response.json({ msg : 'Welcome to IKS BQ' })
+    if(session.get('HasSession')){
+      response.redirect('/dashboard')
+    }else{
+      response.redirect('/login')
+    }
   })
   
   
@@ -75,6 +79,6 @@ const Route = use('Route')
     }).middleware(['Otentifikasi'])
 
     Route.get('logout', ({response, session}) => {
-        session.forget('SessionLogin')
-        return response.redirect('/login', false, 301)
+        session.clear()
+        response.redirect('/login', false, 301)
     })

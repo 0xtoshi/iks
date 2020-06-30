@@ -37,7 +37,7 @@ module.exports = {
   | removed when browser closes.
   |
   */
-  clearWithBrowser: false,
+  clearWithBrowser: true,
 
   /*
   |--------------------------------------------------------------------------
