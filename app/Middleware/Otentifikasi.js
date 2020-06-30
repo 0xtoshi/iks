@@ -12,7 +12,7 @@ class Otentifikasi {
   async handle ({ request, session, response}, next) {
     // call next to advance the request
     
-    if(!session.get('SessionLogin'))
+    if(!session.get('HasSession'))
     {
         return response.redirect('/login', false, 301)
     }
