@@ -60,6 +60,22 @@ class UiController {
         
     }
 
+    async EditSuratPenerimaan({ request, response, session})
+    {
+        const getSessionData = session.get('SessionLogin')
+        var id = request.params.id
+        const getBQ = await BQ.find(id)
+        const getPersonil = await Personil.query().where('id_bq',id).fetch()
+        const getPerlengkapan = await Perlengkapan.query().where('id_bq',id).fetch()
+        const getLain2 = await Lain2.query().where('id_bq',id).fetch()
+        const BQS = getBQ.toJSON()
+        const Personils = getPersonil.toJSON()
+        const Perlengkapans = getPerlengkapan.toJSON()
+        const Lain2s = getLain2.toJSON()
+        
+        return View.render('EditSuratPenerimaan',{BQS, Personils, Perlengkapans, Lain2s, session_data : getSessionData})
+    }
+
     async Login({ request, response , session}){
         
         return View.render('Login')

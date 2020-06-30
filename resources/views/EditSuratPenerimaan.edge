@@ -1,0 +1,287 @@
+@include('BqLayout/head')
+    <body>
+	
+		<!-- Main Wrapper -->
+        <div class="main-wrapper">
+		
+			<!-- Header -->
+            @include('BqLayout/navbar')
+			<!-- /Sidebar -->
+			
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+				
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row">
+							<div class="col-sm-12">
+
+								<ul class="breadcrumb">
+									<li class="breadcrumb-item"><a href="/bq">Tambah BQ Tender</a></li>
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+					
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card">
+                                <div class="card-header">
+									<h4 class="card-title text-center"> <i class="fa fa-plus"></i> FORM TAMBAH BQ</h4>
+									<br/>
+                                <a href="/surat_penerimaan/id/{{ BQS.id }}" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Kembali </a>
+									
+                                </div>
+                                <div class="card-body">
+                                    <div id="notice"></div>
+                                    <form id="tambah_bq">
+                                    <input type="hidden" name="id" value="{{ BQS.id }}">
+                                       <div class="FORM-TENDER">
+                                        <div class="form-group row">
+                                           <label class="control-label col-sm-2 align-self-center mb-0" for="nama_tender">Nama Tender:</label>
+                                           <div class="col-sm-8">
+                                           <input type="text" class="form-control" name="nama_tender" value="{{ BQS.nama }}" id="nama_tender"  placeholder="Nama Tender" readonly>
+                                           </div>
+                                        </div>
+                                        <div class="form-group row">
+                                           <label class="control-label col-sm-2 align-self-center mb-0" for="nama_tender">Nilai Tender:</label>
+                                           <div class="col-sm-8">
+                                              <input type="number" class="form-control" value="{{ BQS.nilai }}" name="nilai_tender" id="nilai_tender"  placeholder="Nilai Tender" readonly>
+                                           </div>
+                                        </div>
+                                        <div class="form-group row">
+                                           <label class="control-label col-sm-2 align-self-center mb-0" for="nama_tender">Nama Instansi:</label>
+                                           <div class="col-sm-8">
+                                              <input type="text" class="form-control" value="{{ BQS.instansi }}" name="instansi_tender" id="instansi_tender"  placeholder="Nama Instansi" readonly>
+                                           </div>
+                                        </div>
+          
+                                        <div class="form-group row">
+                                           <label class="control-label col-sm-2 align-self-center mb-0" for="nama_tender">Lama Tender:</label>
+                                           <div class="col-sm-1">
+                                              <input type="number" class="form-control" value="{{ BQS.lama_tender }}" name="lama_tender" id="lama_tender" placeholder="Bulan" readonly>
+                                           </div>
+                                        </div>
+                                       </div>
+          
+                                        <!-- 
+                                            'jabatan' => $request->input('jabatan'),
+                                              'gaji' => $request->input('gaji'),
+                                              'jumlah' => $request->input('jumlah'),
+                                              'id_bq' => $ID_BQ->id
+                                        -->
+                                       
+                                        @each(data in Personils)
+                                        <div id="personil_form" class="row">
+                                          @if( $loop.index == 0 ) 
+                                          <div class="col-sm-2">
+                                               <label class="text-black"> Personil </label>
+                                           </div>
+                                           @else
+                                           <div class="col-sm-2"></div>
+                                           @endif
+                                        
+                                           <div class="col-sm-3">
+                                             @if( $loop.index == 0 )
+                                               <label> Jabatan </label>
+                                             @endif
+                                           <input type="hidden" name="id_personil[]" value="{{ data.id }}">
+                                           <input type="text" class="form-control" name="personil_jabatan[]" value="{{ data.jabatan }}" id="personil_jabatan" placeholder="Jabatan" readonly>
+                                           </div>
+                                           <div class="col-sm-3">
+                                             @if( $loop.index == 0 )
+                                              <label> Gaji (RP) </label>
+                                             @endif
+                                              <input type="number" class="form-control" name="personil_gaji[]" value="{{ data.gaji }}" id="personil_gaji" placeholder="Gaji" readonly>
+                                           </div>
+                                           <div class="col-sm-2">
+                                             @if( $loop.index == 0 )
+                                              <label> Jumlah </label>
+                                              @endif
+                                              <input type="number" class="form-control" name="personil_jumlah[]" value="{{ data.jumlah }}" id="personil_jumlah" placeholder="Jumlah" readonly>
+                                           </div>
+                                           <div class="col-sm-2">
+                                             @if( $loop.index == 0 )
+                                            <label> Terpenuhi </label>
+                                            @endif
+                                            <input type="number" class="form-control" name="personil_terpenuhi[]"  id="personil_terpenuhi" placeholder="0" required>
+                                         </div> 
+
+
+
+                                        </div>
+                                        @endeach
+                                        
+                                        <br/>
+                                        <!-- 
+                                            'nama' => $request->input('nama'),
+                                              'nominal' => $request->input('nominal'),
+                                              'jumlah' => $request->input('jumlah'),
+                                              'id_bq' => $ID_BQ->id
+                                         -->
+                                        @each(data in Perlengkapans)
+                                        <div id="perlengkapan_form" class="row">
+                                          @if( $loop.index == 0 ) 
+                                          <div class="col-sm-2">
+                                               <label class="text-black"> Perlengkapan </label>
+                                           </div>
+                                           @else
+                                           <div class="col-sm-2"></div>
+                                           @endif
+                                           <div class="col-sm-3">
+                                             @if( $loop.index == 0 )
+                                               <label> Nama Barang </label>
+                                             @endif
+                                           <input type="hidden" name="id_perlengkapan[]" value="{{ data.id }}">
+                                           <input type="text" class="form-control" name="nama_perlengkapan[]" value="{{ data.nama }}" id="nama_perlengkapan" placeholder="Nama Barang" readonly>
+                                           </div>
+                                           <div class="col-sm-3">
+                                             @if( $loop.index == 0 )
+                                              <label> Nominal (RP) </label>
+                                             @endif
+                                              <input type="number" class="form-control" name="nominal_perlengkapan[]" value="{{ data.nominal }}" id="nominal_perlengkapan" placeholder="Nominal" readonly>
+                                           </div>
+                                           <div class="col-sm-2">
+                                             @if( $loop.index == 0 )
+                                              <label> Jumlah </label>
+                                             @endif
+                                              <input type="number" class="form-control" name="jumlah_perlengkapan[]" value="{{ data.jumlah }}" id="jumlah_perlengkapan" placeholder="Jumlah" readonly>
+                                           </div>
+                                           <div class="col-sm-2">
+                                             @if( $loop.index == 0 )
+                                            <label> Terpenuhi </label>
+                                            @endif
+                                            <input type="number" class="form-control" name="perlengkapan_terpenuhi[]"  id="perlengkapan_terpenuhi" placeholder="0" required>
+                                         </div> 
+                                        </div>
+                                        
+                                        @endeach
+          
+
+                                        <br/>
+          
+                                        <!--
+                                             'nama' => $request->input('nama'),
+                                              'nominal' => $request->input('nominal'),
+                                              'jumlah' => $request->input('jumlah'),
+                                              'id_bq' => $ID_BQ->id
+                                         -->
+                                        @each(data in Lain2s)
+                                        <div id="lain2_form" class="row">
+                                          @if( $loop.index == 0 ) 
+                                          <div class="col-sm-2">
+                                               <label class="text-black"> Lain-Lain </label>
+                                           </div>
+                                           @else
+                                           <div class="col-sm-2"></div>
+                                           @endif
+                                           <div class="col-sm-3">
+                                             @if( $loop.index == 0 )
+                                               <label> Nama Item </label>
+                                             @endif
+                                           <input type="hidden" name="id_lain2[]" value="{{ data.id }}">
+                                           <input type="text" id="nama_lain2" name="nama_lain2[]" value="{{ data.nama }}" class="form-control" placeholder="Nama Item " readonly>
+                                           </div>
+                                           <div class="col-sm-3">
+                                             @if( $loop.index == 0 )
+                                              <label> Nominal (RP) </label>
+                                             @endif
+                                              <input type="number" id="nominal_lain2" name="nominal_lain2[]" value="{{ data.nominal }}" class="form-control" placeholder="Nominal" readonly>
+                                           </div>
+                                           <div class="col-sm-2">
+                                             @if( $loop.index == 0 )
+                                              <label> Jumlah </label>
+                                             @endif
+                                              <input type="number" id="jumlah_lain2" name="jumlah_lain2[]" value="{{ data.jumlah }}" class="form-control" placeholder="Jumlah" readonly>
+                                           </div>
+                                           <div class="col-sm-2">
+                                            @if( $loop.index == 0 )
+                                            <label> Terpenuhi </label>
+                                            @endif
+                                            <input type="number" class="form-control" name="lain2_terpenuhi[]" id="lain2_terpenuhi" placeholder="0" required>
+                                         </div> 
+                                        </div>
+                                        @endeach
+
+                                        <br/>
+                                        
+                                        <div class="form-group">
+                                           <button id="Tambah" type="submit" class="btn btn-primary">Submit</button>
+                                          
+                                        </div>
+          
+                                        </form>
+          
+                                    
+                                </div>
+                            </div>
+						</div>			
+					</div>
+					
+				</div>			
+			</div>
+			<!-- /Page Wrapper -->
+		
+        </div>
+		<!-- /Main Wrapper -->
+		
+@include('BqLayout/footer')
+
+<script>
+
+(function ($) {
+				$.fn.serializeFormJSON = function () {
+
+					var o = {};
+					var a = this.serializeArray();
+					$.each(a, function () {
+						if (o[this.name]) {
+							if (!o[this.name].push) {
+								o[this.name] = [o[this.name]];
+							}
+							o[this.name].push(this.value || '');
+						} else {
+							o[this.name] = this.value || '';
+						}
+					});
+					return o;
+				};
+			})(jQuery);
+
+   $('document').ready(()=> {
+
+      console.log('Document Ready!')
+
+
+
+
+      $('#tambah_bq').submit((e) => {
+
+         e.preventDefault()
+
+         var tender_param = $('#tambah_bq').serializeFormJSON()
+         console.log(tender_param)
+
+         $.ajax({
+
+            url : '/Api/TambahSuratPenerimaan',
+            method : 'POST',
+            data : tender_param,
+            success : (data) => {
+               swal("Sukses!", data.msg , "success");
+               $('body').append('<meta http-equiv="refresh" content="2;url=/surat_penerimaan/id/{{ BQS.id }}" />');
+            },
+            error : (error) => {
+               $('#notice').html('<div class="alert alert-danger">Gagal Menyimpan BQ Tender Pastikan Form sudah diisi dengan benar!</div>')
+            }
+         })
+
+      })
+
+   })
+   
+
+</script>
