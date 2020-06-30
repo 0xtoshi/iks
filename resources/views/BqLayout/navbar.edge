@@ -67,29 +67,18 @@
                    <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
                       <img src="/template/images/user/1.jpg" class="img-fluid rounded mr-3" alt="user">
                       <div class="caption">
-                         <h6 class="mb-0 line-height">Bini Jets</h6>
-                         <span class="font-size-12">Available</span>
+                      <h6 class="mb-0 line-height text-uppercase">{{ session_data.username }}</h6>
+                      <span class="font-size-12">Jabatan : {{ session_data.jabatan }}</span>
                       </div>
                    </a>
                    <div class="iq-sub-dropdown iq-user-dropdown">
                       <div class="iq-card shadow-none m-0">
                          <div class="iq-card-body p-0 ">
                             <div class="bg-primary p-3">
-                               <h5 class="mb-0 text-white line-height">Hello Bini Jets</h5>
-                               <span class="text-white font-size-12">Available</span>
+                            <h5 class="mb-0 text-white line-height text-uppercase">Hello {{ session_data.username }}</h5>
+                            <span class="text-white font-size-12">{{ session_data.jabatan }}</span>
                             </div>
-                            <a href="profile.html" class="iq-sub-card iq-bg-primary-hover">
-                               <div class="media align-items-center">
-                                  <div class="rounded iq-card-icon iq-bg-primary">
-                                     <i class="ri-file-user-line"></i>
-                                  </div>
-                                  <div class="media-body ml-3">
-                                     <h6 class="mb-0 ">My Profile</h6>
-                                     <p class="mb-0 font-size-12">View personal profile details.</p>
-                                  </div>
-                               </div>
-                            </a>
-                            <a href="profile-edit.html" class="iq-sub-card iq-bg-primary-hover">
+                            <a href="/user/edit_profil" class="iq-sub-card iq-bg-primary-hover">
                                <div class="media align-items-center">
                                   <div class="rounded iq-card-icon iq-bg-primary">
                                      <i class="ri-profile-line"></i>
@@ -111,19 +100,9 @@
                                   </div>
                                </div>
                             </a>
-                            <a href="privacy-setting.html" class="iq-sub-card iq-bg-primary-hover">
-                               <div class="media align-items-center">
-                                  <div class="rounded iq-card-icon iq-bg-primary">
-                                     <i class="ri-lock-line"></i>
-                                  </div>
-                                  <div class="media-body ml-3">
-                                     <h6 class="mb-0 ">Privacy Settings</h6>
-                                     <p class="mb-0 font-size-12">Control your privacy parameters.</p>
-                                  </div>
-                               </div>
-                            </a>
+                            
                             <div class="d-inline-block w-100 text-center p-3">
-                               <a class="bg-primary iq-sign-btn" href="sign-in.html" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                               <a class="bg-primary iq-sign-btn" href="/logout" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
                             </div>
                      </div>
                   </div>

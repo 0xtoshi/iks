@@ -30,41 +30,50 @@ class TenderController {
         var personil_gaji  = post.personil_gaji
         var personil_terpenuhi = post.personil_terpenuhi
 
+        var personile = []
         for (let i = 0; i < id_personil.length; i++) {
-            await Tender.create({
+            personile.push({
                 bulan : newBulan,
                 nominal : (Number(personil_gaji[i]) * Number(personil_terpenuhi[i])),
                 id_bq : post.id,
                 category : 'personil',
                 ids : id_personil[i]
-            })  
+            })
         }
+
+        await Tender.createMany(personile)
 
         var id_perlengkapan = post.id_perlengkapan
         var nominal_perlengkapan = post.nominal_perlengkapan
         var perlengkapan_terpenuhi = post.perlengkapan_terpenuhi
-        for (let i = 0; i < id_personil.length; i++) {
-            await Tender.create({
+        var perlengkapane = []
+        for (let i = 0; i < id_perlengkapan.length; i++) {
+            perlengkapane.push({
                 bulan : newBulan,
                 nominal : (Number(nominal_perlengkapan[i]) * Number(perlengkapan_terpenuhi[i])),
                 id_bq : post.id,
                 category : 'perlengkapan',
                 ids : id_perlengkapan[i]
-            })  
+            })
         }
 
-        var id_lain2 = post.id_personil
+        await Tender.createMany(perlengkapane)
+
+        var id_lain2 = post.id_lain2
         var nominal_lain2 = post.nominal_lain2
         var lain2_terpenuhi = post.lain2_terpenuhi
-        for (let i = 0; i < id_personil.length; i++) {
-            await Tender.create({
+        var lain2e = []
+        for (let i = 0; i < id_lain2.length; i++) {
+            lain2e.push({
                 bulan : newBulan,
                 nominal : (Number(nominal_lain2[i]) * Number(lain2_terpenuhi[i])),
                 id_bq : post.id,
                 category : 'lain2',
                 ids : id_lain2[i]
-            })  
+            })
         }
+
+        await Tender.createMany(lain2e)
 
         return response.status(200).json({ status : 200 , msg : 'Sukses Menyimpan Tender!' })
     }

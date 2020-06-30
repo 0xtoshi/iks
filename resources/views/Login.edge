@@ -14,7 +14,9 @@
 	<!-- Style CSS -->
 	<link rel="stylesheet" href="/template/css/style.css">
 	<!-- Responsive CSS -->
-	<link rel="stylesheet" href="/template/css/responsive.css">
+    <link rel="stylesheet" href="/template/css/responsive.css">
+    
+    <link rel="stylesheet" href="/swal/sweetalert.css">
  </head>
     <body>
 		<section class="sign-in-page">
@@ -29,7 +31,7 @@
                         <div class="sign-in-from">
                             <h1 class="mb-0">Login</h1>
                             <p>Login untuk mengakses Sistem Informasi Budget Tender.</p>
-                            <form class="mt-4">
+                            <form id="login" class="mt-4">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Username</label>
                                     <input class="form-control" name="username" type="text" placeholder="Username">
@@ -81,6 +83,7 @@
       <script src="/template/js/smooth-scrollbar.js"></script>
       <!-- Chart Custom JavaScript -->
       <script src="/template/js/chart-custom.js"></script>
+      <script src="/swal/sweetalert.js"></script>
       <!-- Custom JavaScript -->
       <script src="/template/js/custom.js"></script>
 		<script>
@@ -115,13 +118,16 @@
 						data : param,
 						method : 'POST',
 						success : (data) => {
-							$('#login-notice').html('<div class="alert alert-success">'+data.msg+'</div>')
+                           
+                            swal("Sukses!", data.msg , "success");
+                            $('body').append('<meta http-equiv="refresh" content="2;url=/dashboard" />');
 						},
 						error : (e) => {
 							var callback = e.responseJSON
 							$.each(callback.msg, (key, value) => {
 								console.log(value)
-								$('#login-notice').append('<div class="alert alert-danger">'+value.message+'</div>')
+                                
+                                swal("Error!", value.message , "error");
 							})
 							
 						}
@@ -130,7 +136,11 @@
 
 			})
 
-		</script>
+        </script>
+        
+        @if(flashMessage('notification'))
+        <script>swal("Error!", {{ flashMessage('notification') }} , "error");</script>
+        @endif
 		
     </body>
 </html>
