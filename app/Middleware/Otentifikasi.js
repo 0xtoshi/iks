@@ -14,7 +14,7 @@ class Otentifikasi {
     
     if(!session.get('SessionLogin'))
     {
-        return response.redirect('/login', false, 403)
+        return response.redirect('/login', false, 301)
     }
     await next(request)
   }

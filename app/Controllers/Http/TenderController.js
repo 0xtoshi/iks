@@ -92,6 +92,26 @@ class TenderController {
         return response.status(200).json({ status : 200 , msg : 'Sukses Menghapus Surat Penerimaan!' })
     }
 
+    async UpdateSuratPenerimaan({request, response, session})
+    {
+        var post = request.all()
+        var id = post.id
+        var nominal = post.nominal
+        var terpenuhi = post.terpenuhi
+        var param = []
+
+        for (let i = 0; i < id.length; i++) {
+            
+            await Tender.updateOrCreate({
+                id : id[i],
+            },{
+                nominal : Number(nominal[i]) * Number(terpenuhi[i])
+            })
+        }
+
+        return response.status(200).json({ status : 200 , msg : 'Sukses Mengupdate Surat Penerimaan!' })
+    }
+
 }
 
 module.exports = TenderController
