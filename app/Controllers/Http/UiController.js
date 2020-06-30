@@ -178,6 +178,12 @@ class UiController {
         const getSessionData = session.get('SessionLogin')
         return View.render('SuratTenderSelesai', { data_bq : getDataBQ.toJSON(), session_data : getSessionData})
     }
+
+    async ProgressTender({ request, response, session }){
+        const getDataBQ = await BQ.all()
+        const getSessionData = session.get('SessionLogin')
+        return View.render('ProgressTender', { data_bq : getDataBQ.toJSON(), session_data : getSessionData})
+    }
 }
 
 module.exports = UiController

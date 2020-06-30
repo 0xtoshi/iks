@@ -1,4 +1,6 @@
 @include('BqLayout/head')
+
+	<link rel="stylesheet" href="/chart/Chart.min.css">
     <body>
 	
 		<!-- Main Wrapper -->
@@ -18,7 +20,7 @@
 							<div class="col-sm-12">
 
 								<ul class="breadcrumb">
-									<li class="breadcrumb-item"><a href="/surat_penerimaan">Surat Penerimaan</a></li>
+									<li class="breadcrumb-item"><a href="/progress_tender">Progress Tender</a></li>
 									
 								</ul>
 							</div>
@@ -30,7 +32,7 @@
 						<div class="col-sm-12">
 							<div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title text-center">INVOICE</h4>
+                                    <h4 class="card-title text-center">Progress Tender</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -41,24 +43,28 @@
 													<th>Nilai Tender</th>
 													<th>Nama Instansi</th>
 													<th>Lama Bulan</th>
+													<th>Chart</th>
 													<th>Alat</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>Tiger Nixon</td>
-													<td>System Architect</td>
-													<td>Edinburgh</td>
-													<td>61</td>
-													<td>2011/04/25</td>
+												@each(data in data_bq) 
+												<tr id="bq_{{ data.id }}">
+													<td>{{ data.nama }}</td>
+													<td id="nilai_tender">{{ data.nilai }}</td>
+													<td>{{ data.instansi }}</td>
+													<td>{{ data.lama_tender }}</td>
+													<td>
+														
+															<canvas style="width: 150px; height: 150px;" id="chart"></canvas>
+														
+													</td>
+													<td>
+													<a href="/input_surat_laporan/id/{{ data.id }}" class="btn btn-info" type="button">Pilih!</a>
+													
+													</td>
 												</tr>
-												<tr>
-													<td>Garrett Winters</td>
-													<td>Accountant</td>
-													<td>Tokyo</td>
-													<td>63</td>
-													<td>2011/07/25</td>
-												</tr>
+												@endeach
 											</tbody>
 										</table>
 									</div>
@@ -75,3 +81,40 @@
 		<!-- /Main Wrapper -->
 		
 @include('BqLayout/footer')
+<script src="/chart/Chart.min.js"></script>
+
+<script>
+
+		$("td[id=nilai_tender]").each(function(){
+				$(this).html( convertToRupiah ( parseInt( $(this).text() ) ) );
+		});
+
+        function convertToRupiah(angka)
+        {
+            var rupiah = '';		
+            var angkarev = angka.toString().split('').reverse().join('');
+            for(var i = 0; i < angkarev.length; i++) if(i%3 == 0) rupiah += angkarev.substr(i,3)+'.';
+            return 'Rp. '+rupiah.split('',rupiah.length-1).reverse().join('');
+		}
+		
+		$('document').ready(function(){
+			
+			new Chart(document.getElementById("chart"), {
+			type: 'pie',
+			data: {
+			labels: ["Bulan", "Sisa Bulan"],
+			datasets: [{
+				backgroundColor: ["#27ae60", "#e74c3c"],
+				data: [12,1]
+			}]
+			},
+			options: {
+				responsive: false,
+				legend: {
+					display: false
+				}
+			}
+		});
+
+		})
+</script>

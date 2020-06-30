@@ -63,7 +63,7 @@ Route.on('/').render('welcome')
     Route.get('input_surat_laporan','UiController.InputSuratLaporan')
     Route.get('input_surat_laporan/id/:id','UiController.PilihInputSuratLaporan').as('id')
     Route.get('tender_selesai','UiController.SuratTenderSelesai')
-    Route.get('progress_tender','UiController.SuratPenerimaan')
+    Route.get('progress_tender','UiController.ProgressTender')
     }).middleware(['Otentifikasi'])
 
     Route.get('logout', ({response, session}) => {
