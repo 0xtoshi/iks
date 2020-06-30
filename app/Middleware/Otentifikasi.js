@@ -12,7 +12,6 @@ class Otentifikasi {
   async handle ({ request, session, response}, next) {
     // call next to advance the request
     var sessions = session.get('HasSession')
-    console.log(sessions)
     if(sessions !== true)
     {
         return response.redirect('/login', false, 301)
